@@ -1,0 +1,14 @@
+{
+  "name": "firebase-helpers",
+  "version": "1.0.0",
+  "description": "Helper functions for Firebase projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "firebase"
+  ],
+  "author": "stefan@ganzdigital.com",
+  "license": "ISC"
+}
