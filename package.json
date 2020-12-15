@@ -10,5 +10,14 @@
     "firebase"
   ],
   "author": "stefan@ganzdigital.com",
+  "repository": {
+    "url": "https://github.com/Ganz-Digital/firebase-helpers.git"
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "arrowParens": "avoid",
+    "singleQuote": true
+  },
   "license": "ISC"
 }
