@@ -1,3 +1,7 @@
-import { convertFirestoreTimestamps, getPaginatedData } from "./src/firestore";
+import {
+  convertFirestoreTimestamps,
+  getPaginatedData,
+  convertQuerySnapshot,
+} from './src/firestore';
 
-export { convertFirestoreTimestamps, getPaginatedData };
+export { convertFirestoreTimestamps, getPaginatedData, convertQuerySnapshot };
