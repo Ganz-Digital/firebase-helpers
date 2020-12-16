@@ -7,7 +7,10 @@ export function convertFirestoreTimestamps(firebaseDocumentData) {
   for (const key in firebaseDocumentData) {
     if (firebaseDocumentData.hasOwnProperty(key)) {
       const value = firebaseDocumentData[key];
-      if (typeof value === "object") {
+      if (!value) {
+        continue;
+      }
+      if (typeof value === 'object') {
         if (Array.isArray(value)) {
           continue;
         }
@@ -42,7 +45,7 @@ export async function getPaginatedData(query, lastDocument, pageSize = 10) {
       };
     }
     const data = [];
-    snapshot.forEach((doc) => data.push({ id: doc.id, ...doc.data() }));
+    snapshot.forEach(doc => data.push({ id: doc.id, ...doc.data() }));
     return {
       data: data,
       lastDoc: snapshot.docs[snapshot.docs.length - 1],
@@ -62,7 +65,7 @@ export async function getPaginatedData(query, lastDocument, pageSize = 10) {
  * @param {boolean} transformDates Do you want to turn Firebase timestamps into JS dates? Default: true.
  */
 export function convertQuerySnapshot(querySnapshot, transformDates = true) {
-  return querySnapshot.docs.map((doc) => {
+  return querySnapshot.docs.map(doc => {
     let data = doc.data();
     if (transformDates) {
       data = convertFirestoreTimestamps(data);
