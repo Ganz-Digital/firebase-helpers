@@ -81,18 +81,23 @@ export function convertQuerySnapshot(querySnapshot, transformDates = true) {
  * @param {array} documentIDs The array of values that the query should match
  * @param {number} batchSize Default: 10
  */
-  export function getDocsByArrayMembership(query, fieldToQuery, array, batchSize = 10) {
-      let batchStart = 0;
-      let batchEnd = batchStart + batchSize;
-      let data = []
-      while (batchEnd < array.length) {
-        const batch = await query
-          .where(fieldToQuery, 'in', array.slice(batchStart, batchEnd))
-          .get()
-          .then(convertQuerySnapshot)
-        data = [...data, ...batch]
-        batchStart += batchSize;
-        batchEnd += batchSize;
-      }
-      return data;
+export async function getDocsByArrayMembership(
+  query,
+  fieldToQuery,
+  array,
+  batchSize = 10,
+) {
+  let batchStart = 0;
+  let batchEnd = batchStart + batchSize;
+  let data = [];
+  while (batchEnd < array.length) {
+    const batch = await query
+      .where(fieldToQuery, 'in', array.slice(batchStart, batchEnd))
+      .get()
+      .then(convertQuerySnapshot);
+    data = [...data, ...batch];
+    batchStart += batchSize;
+    batchEnd += batchSize;
   }
+  return data;
+}
