@@ -73,3 +73,26 @@ export function convertQuerySnapshot(querySnapshot, transformDates = true) {
     return { id: doc.id, ...data };
   });
 }
+
+/**
+ * Get documents with an 'in' query where the array contains more than 10 elements.
+ * @param {Firestore Query | FirestoreCollectionReference} query A Firestore query or collection
+ * @param {string | any} fieldToQuery The field you want to query
+ * @param {array} documentIDs The array of values that the query should match
+ * @param {number} batchSize Default: 10
+ */
+  export function getDocsByArrayMembership(query, fieldToQuery, array, batchSize = 10) {
+      let batchStart = 0;
+      let batchEnd = batchStart + batchSize;
+      let data = []
+      while (batchEnd < array.length) {
+        const batch = await query
+          .where(fieldToQuery, 'in', array.slice(batchStart, batchEnd))
+          .get()
+          .then(convertQuerySnapshot)
+        data = [...data, ...batch]
+        batchStart += batchSize;
+        batchEnd += batchSize;
+      }
+      return;
+  }
