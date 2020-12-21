@@ -94,5 +94,5 @@ export function convertQuerySnapshot(querySnapshot, transformDates = true) {
         batchStart += batchSize;
         batchEnd += batchSize;
       }
-      return;
+      return data;
   }
