@@ -90,7 +90,7 @@ export async function getDocsByArrayMembership(
   let batchStart = 0;
   let batchEnd = batchStart + batchSize;
   let data = [];
-  while (batchEnd < array.length) {
+  while (batchStart < array.length) {
     const batch = await query
       .where(fieldToQuery, 'in', array.slice(batchStart, batchEnd))
       .get()
