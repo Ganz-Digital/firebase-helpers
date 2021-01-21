@@ -12,6 +12,7 @@ export function convertFirestoreTimestamps(firebaseDocumentData) {
       }
       if (typeof value === 'object') {
         if (Array.isArray(value)) {
+          data[key] = value.map(el => convertFirestoreTimestamps(el));
           continue;
         }
         if (value.toDate) {
