@@ -1,6 +1,6 @@
 {
   "name": "firebase-helpers",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Helper functions for Firebase projects",
   "main": "index.js",
   "scripts": {
