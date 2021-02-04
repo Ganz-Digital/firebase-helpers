@@ -14,6 +14,7 @@ function convertValue(value) {
     }
     return convertFirestoreTimestamps(value);
   }
+  return value;
 }
 
 /**
