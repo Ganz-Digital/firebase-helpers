@@ -1,3 +1,21 @@
+function convertValue(value) {
+  if (!value) {
+    return value;
+  }
+  if (typeof value === 'object') {
+    if (Array.isArray(value)) {
+      return value.map(el => convertValue(el));
+    }
+    if (value.toDate) {
+      return value.toDate();
+    }
+    if (value === null) {
+      return value;
+    }
+    return convertFirestoreTimestamps(value);
+  }
+}
+
 /**
  * Recursively turn Firebase timestamps into JS Date objects.
  * @param {object} firebaseDocumentData The document you want to convert
@@ -7,23 +25,7 @@ export function convertFirestoreTimestamps(firebaseDocumentData) {
   for (const key in firebaseDocumentData) {
     if (firebaseDocumentData.hasOwnProperty(key)) {
       const value = firebaseDocumentData[key];
-      if (!value) {
-        continue;
-      }
-      if (typeof value === 'object') {
-        if (Array.isArray(value)) {
-          data[key] = value.map(el => convertFirestoreTimestamps(el));
-          continue;
-        }
-        if (value.toDate) {
-          data[key] = value.toDate();
-          continue;
-        }
-        if (value === null) {
-          continue;
-        }
-        data[key] = convertFirestoreTimestamps(value);
-      }
+      data[key] = convertValue(value);
     }
   }
   return data;
