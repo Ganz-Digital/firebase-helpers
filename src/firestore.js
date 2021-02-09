@@ -2,6 +2,9 @@ function convertValue(value) {
   if (!value) {
     return value;
   }
+  if (typeof value === 'string') {
+    return value;
+  }
   if (typeof value === 'object') {
     if (Array.isArray(value)) {
       return value.map(el => convertValue(el));
