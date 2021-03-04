@@ -61,7 +61,7 @@ export async function getPaginatedData(query, lastDocument, pageSize = 10) {
       lastDoc: snapshot.docs[snapshot.docs.length - 1],
     };
   } catch (e) {
-    logError(e);
+    console.error(e);
     return {
       data: [],
       lastDoc: null,
